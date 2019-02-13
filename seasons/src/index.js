@@ -6,18 +6,13 @@ class App extends React.Component {
         super(props);
 
         // this is the only time we do use the direct assignment to 'this.state' method
-        this.state = { lat: null, errorMessage: '' };
+        this.state = { lat: null, errorMessage: '' };      
+    }
 
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
-            position => {
-                // we must call setState
-                this.setState({ lat: position.coords.latitude });
-
-                //this.state.lat = position.coords.latitude     is VERY bad example!!!
-            },
-            positionError => {
-                this.setState({ errorMessage: positionError.message });
-            }
+            position => this.setState({ lat: position.coords.latitude }),
+            positionError => this.setState({ errorMessage: positionError.message })
         );
     }
 
